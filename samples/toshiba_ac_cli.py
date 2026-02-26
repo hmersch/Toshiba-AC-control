@@ -38,7 +38,7 @@ async def func(args):
                 print(f"Air Pure Ion: {device.ac_air_pure_ion.name}")
                 print(f"Temperature: {device.ac_temperature} °C")
             #temp
-            if hasattr(args, 'temp'): 
+            if hasattr(args, 'temp') and args.temp is not None: 
                  print(f"Setting temp {args.temp} for device: {device.name}")
                  await device.set_ac_temperature(args.temp)
             #mode
@@ -49,8 +49,6 @@ async def func(args):
             if hasattr(args, 'fan')  and args.fan in ["auto", "low", "medium", "high"]:
                  print(f"Setting fan mode {args.fan} for device: {device.name}")
                  await device.set_ac_fan_mode(ToshibaAcFanMode[args.fan.upper()])
-            else: 
-                 print(f"Unknown FanCmd {args.fan} for device: {device.name} - use 'auto', 'low', 'medium' or 'high'")
             #power
             if hasattr(args, 'power') and args.power in ["on", "off"]:
                  print(f"Setting power  {args.power} for device: {device.name}")
